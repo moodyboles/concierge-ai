@@ -49,6 +49,12 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
 
     - name: Laravel commands
+      env:
+          DB_CONNECTION: mysql
+          DB_DATABASE: imteam_concierge
+          DB_PORT: 3306
+          DB_USER: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       run: |
         php artisan key:generate
         php artisan migrate
