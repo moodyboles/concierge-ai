@@ -100,7 +100,7 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./concierge.moodyboles.com/
+        server-dir: concierge.moodyboles.com/
 
     - name: Generate key
       run: php artisan key:generate
