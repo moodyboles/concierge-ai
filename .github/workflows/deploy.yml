@@ -50,5 +50,6 @@ jobs:
 
     - name: Laravel commands
       run: |
-        ~/../../opt/cpanel/ea-php81/root/usr/bin/php artisan migrate
-        ~/../../opt/cpanel/ea-php81/root/usr/bin/php artisan optimize:clear
+        php artisan key:generate
+        php artisan migrate
+        php artisan optimize:clear
