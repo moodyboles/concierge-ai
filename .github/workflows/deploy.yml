@@ -103,6 +103,12 @@ jobs:
 
     - name: Generate key
       run: php artisan key:generate
+      
+    - name: Start Inertia Server Side Rendering
+      run: php artisan inertia:start-ssr
+
+    - name: Clear Laravel Cache
+      run: php artisan optimize:clear
     
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
