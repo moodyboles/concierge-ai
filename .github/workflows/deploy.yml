@@ -104,15 +104,15 @@ jobs:
     - name: Generate key
       run: php artisan key:generate
 
-    - name: Run Migrations
-      # Set environment
-      env:
-        DB_CONNECTION: mysql
-        DB_DATABASE: ${{ secrets.DB_USERNAME }}
-        DB_PORT: 33306
-        DB_USER: ${{ secrets.DB_USERNAME }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      run: php artisan migrate
+    # - name: Run Migrations
+    #   # Set environment
+    #   env:
+    #     DB_CONNECTION: mysql
+    #     DB_DATABASE: ${{ secrets.DB_USERNAME }}
+    #     DB_PORT: 33306
+    #     DB_USER: ${{ secrets.DB_USERNAME }}
+    #     DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+    #   run: php artisan migrate
 
     - name: Clear Laravel Cache
       run: php artisan optimize:clear
