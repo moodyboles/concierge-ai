@@ -51,7 +51,7 @@ export default function EventForm(props) {
                             <InputError className="mt-2" message={errors.type} />
                         </div>
                         <div>
-                            <InputLabel htmlFor="occasion" value="Occassion" />
+                            <InputLabel htmlFor="occasion" value="Occasion" />
 
                             <SelectBox 
                                 options={occasions} 
