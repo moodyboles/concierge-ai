@@ -38,26 +38,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.x'
-    
-    - name: Cache node_modules directory
-      uses: actions/cache@v3
-      id: node_modules-cache
-      with:
-        path: node_modules
-        key: ${{ runner.OS }}-build-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
-    
-    - name: Install NPM packages
-      if: steps.node_modules-cache.outputs.cache-hit != 'true'
-      run: npm ci
-    
-    - name: Build frontend
-      run: npm run build
-    
+
     - name: Install PHP versions
       uses: shivammathur/setup-php@v2
       with:
@@ -93,6 +74,25 @@ jobs:
     - name: Update Dependencies with latest stable
       if: matrix.dependency-stability == 'prefer-stable'
       run: composer update --prefer-stable
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+    
+    - name: Cache node_modules directory
+      uses: actions/cache@v3
+      id: node_modules-cache
+      with:
+        path: node_modules
+        key: ${{ runner.OS }}-build-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
+    
+    - name: Install NPM packages
+      if: steps.node_modules-cache.outputs.cache-hit != 'true'
+      run: npm ci
+    
+    - name: Build frontend
+      run: npm run build
 
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
