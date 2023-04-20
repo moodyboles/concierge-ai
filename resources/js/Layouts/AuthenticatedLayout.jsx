@@ -24,6 +24,9 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
                                 </NavLink>
+                                <NavLink href={route('generate.view')} active={route().current('generate.view')}>
+                                    Generate Dishes
+                                </NavLink>
                             </div>
                         </div>
 
