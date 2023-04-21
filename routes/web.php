@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TokensController;
 use App\Http\Controllers\GenerateDishes;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::prefix('settings')->group(function () {
+        Route::resource('tokens', TokensController::class)->only(['index', 'store']);
+        Route::delete('tokens', [TokensController::class, 'destroy'])->name('tokens.destroy');
+    });
 });
 
 Route::prefix('generate')
