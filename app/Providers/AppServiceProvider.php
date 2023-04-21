@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Token;
+use Laravel\Sanctum\Sanctum;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,8 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if($this->app->environment('production')) {
+        // Force HTTPS on production
+        if ($this->app->environment('production')) {
             \URL::forceScheme('https');
         }
+
+        // Override the default PersonalAccessToken model
+        Sanctum::usePersonalAccessTokenModel(Token::class);
     }
 }
