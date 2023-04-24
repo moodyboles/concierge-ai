@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Classes\AI\OpenAi\OpenAi;
 
 class GenerateDishes extends Controller
 {
@@ -20,7 +21,7 @@ class GenerateDishes extends Controller
         ]);
     }
 
-    public function generate(Request $request)
+    public function store(Request $request)
     {
         $event = Event::create([
             'user_id' => Auth::id(),
@@ -30,5 +31,11 @@ class GenerateDishes extends Controller
             'diets' => $request->diets,
         ]);
 
+        return $event;
+    }
+
+    public function generate(Request $request)
+    {
+        $this->store($request);
     }
 }
