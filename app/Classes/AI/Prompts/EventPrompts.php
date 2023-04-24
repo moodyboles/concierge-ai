@@ -33,19 +33,19 @@ class EventPrompts extends Prompts
         $prompt = '';
 
         if ($this->event->type && $this->event->type != 'other') {
-            $prompt .= 'Event Type: ' . $this->formatValue($this->event->type) . '\n';
+            $prompt .= 'Event Type: ' . formatValue($this->event->type) . '\n';
         }
 
         if ($this->event->occasion && $this->event->occasion != 'other') {
-            $prompt .= 'Occasion: ' . $this->formatValue($this->event->occasion) . '\n';
+            $prompt .= 'Occasion: ' . formatValue($this->event->occasion) . '\n';
         }
 
         if ($this->event->cuisines) {
-            $prompt .= 'Preferred Cuisines: ' . $this->formatValue($this->event->cuisines) . '\n';
+            $prompt .= 'Preferred Cuisines: ' . formatValue($this->event->cuisines) . '\n';
         }
 
         if ($this->event->diets) {
-            $prompt .= 'Diets: ' . $this->formatValue($this->event->diets) . '\n';
+            $prompt .= 'Diets: ' . formatValue($this->event->diets) . '\n';
         }
 
         return $prompt;

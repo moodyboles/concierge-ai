@@ -23,9 +23,49 @@ class Event extends Model
         'diets' => 'array',
     ];
 
+    protected $appends = [
+        'formatted_type',
+        'formatted_occasion',
+        'formatted_cuisines',
+        'formatted_diets',
+    ];
+
+
+    /**
+     * Relationships
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function token()
+    {
+        return $this->belongsTo(Token::class);
+    }
+    
+
+    /**
+     * Attributes
+     */
+    public function getFormattedTypeAttribute()
+    {
+        return formatValue($this->type);
+    }
+
+    public function getFormattedOccasionAttribute()
+    {
+        return formatValue($this->occasion);
+    }
+
+    public function getFormattedCuisinesAttribute()
+    {
+        return formatValue($this->cuisines);
+    }
+
+    public function getFormattedDietsAttribute()
+    {
+        return formatValue($this->diets);
     }
 
 }

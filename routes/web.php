@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TokensController;
 use App\Http\Controllers\GenerateDishes;
+use App\Http\Controllers\EventsController;
 use App\Http\Controllers\Api\DishesApiController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,8 @@ Route::prefix('generate')
         Route::get('/dishes', [GenerateDishes::class, 'index'])->name('generate.view');
         Route::patch('/dishes', [GenerateDishes::class, 'generate'])->name('generate.dishes');
 });
+
+Route::resource('events', EventsController::class)->only(['index', 'show'])->middleware('auth');
 
 Route::prefix('api')
     ->group(function () {

@@ -41,27 +41,4 @@ class Prompts
     {
         return "You’re a helpful assistant that’s collecting information about a dining event to help the caterer to plan the menu based on the information shared.";
     }
-
-    protected function formatValue($value) 
-    {
-        if (is_array($value)) {
-            
-            $value = array_map(function($item) {
-                return $this->formatText($item);
-            }, $value);
-
-            return implode(', ', $value);
-
-        } else {
-            return $this->formatText($value);
-        }
-    }
-
-    protected function formatText($text) 
-    {
-        $text = str_replace("_", ' ', $text);
-        $text = str_replace("-", ' ', $text);
-        $text = ucwords($text);
-        return $text;
-    }
 }
