@@ -30,10 +30,23 @@ class EventPrompts extends Prompts
 
     public function getEventPrompt() 
     {
-        $prompt = 'Event Type: ' . $this->formatValue($this->event->type) . '\n';
-        $prompt .= 'Occasion: ' . $this->formatValue($this->event->occasion) . '\n';
-        $prompt .= 'Preferred Cuisines: ' . $this->formatValue($this->event->cuisines) . '\n';
-        $prompt .= 'Diets: ' . $this->formatValue($this->event->diets) . '\n';
+        $prompt = '';
+
+        if ($this->event->type && $this->event->type != 'other') {
+            $prompt .= 'Event Type: ' . $this->formatValue($this->event->type) . '\n';
+        }
+
+        if ($this->event->occasion && $this->event->occasion != 'other') {
+            $prompt .= 'Occasion: ' . $this->formatValue($this->event->occasion) . '\n';
+        }
+
+        if ($this->event->cuisines) {
+            $prompt .= 'Preferred Cuisines: ' . $this->formatValue($this->event->cuisines) . '\n';
+        }
+
+        if ($this->event->diets) {
+            $prompt .= 'Diets: ' . $this->formatValue($this->event->diets) . '\n';
+        }
 
         return $prompt;
     }

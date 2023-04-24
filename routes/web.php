@@ -51,11 +51,10 @@ Route::prefix('generate')
 });
 
 Route::prefix('api')
-    ->middleware('auth')
     ->group(function () {
 
         Route::prefix('v1')
-            ->middleware('auth')
+            ->middleware('auth:sanctum')
             ->group(function () {
 
                 Route::get('/generate-dishes', [DishesApiController::class, 'get'])->name('api.dishes');

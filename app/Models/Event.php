@@ -15,6 +15,7 @@ class Event extends Model
         'occasion',
         'cuisines',
         'diets',
+        'token_id',
     ];
 
     protected $casts = [

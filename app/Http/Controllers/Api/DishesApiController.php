@@ -6,15 +6,34 @@ use App\Classes\AI\OpenAi\Chat;
 use App\Classes\AI\Prompts\EventPrompts;
 use App\Models\Event;
 use App\Http\Controllers\Controller;
+use App\Service\EventService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class DishesApiController extends Controller
 {
     public function get(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        if ($request->bearerToken()) {
+
+            $token_id = $request->user()->currentAccessToken()->id;
+            $request->token_id = $token_id;
+
+            $event = (new EventService)->createEvent($request);
+
+            if (isset($event->id)) {
+                $event_id = $event->id;
+                $request->event_id = $event_id;
+            }
+
+        } else {
+            $event_id = $request->event_id;
+        }
+
+
+        $validator = Validator::make(["event_id" => $event_id], [
             'event_id' => [
                 'required',
                 'exists:events,id,user_id,' . Auth::id(),
@@ -28,7 +47,6 @@ class DishesApiController extends Controller
         if (!$event) return $this->unauthorized();
 
         return $this->generateDishesFromEvent($event);
-
     }
 
     public function generateDishesFromEvent(Event $event) 
@@ -40,6 +58,8 @@ class DishesApiController extends Controller
         
         $chat = new Chat();
         $response = $chat->chat($eventPrompt->getMessages());
+
+        Log::debug([$event->id, $response]);
 
         return [$response];
     }
