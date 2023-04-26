@@ -43,6 +43,11 @@ class Event extends Model
     {
         return $this->belongsTo(Token::class);
     }
+
+    public function menus()
+    {
+        return $this->hasMany(Menu::class);
+    }
     
 
     /**

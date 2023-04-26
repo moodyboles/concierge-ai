@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use App\Classes\AI\OpenAi\OpenAi;
 use App\Service\EventService;
+use App\Service\GenerateService;
 
 class GenerateDishes extends Controller
 {
@@ -26,8 +27,16 @@ class GenerateDishes extends Controller
         return (new EventService)->createEvent($request);
     }
 
+    public function generateMenu(Event $event)
+    {
+        $generateService = new GenerateService($event);
+        return $generateService->generateDishesFromEvent();
+    }
+
     public function generate(Request $request)
     {
-        $this->store($request);
+        $event = $this->store($request);
+        $menu = $this->generateMenu($event);
+        return redirect()->route('events.show', ['event' => $event->id]);
     }
 }
