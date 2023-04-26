@@ -69,7 +69,7 @@ export default function EventForm(props) {
                 <div>
                     <InputLabel htmlFor="cuisines" value="Cuisines" />
 
-                    <div className='grid grid-cols-4 gap-2 mt-2'>
+                    <div className='grid grid-cols-2 md:grid-cols-4 gap-2 mt-2'>
                         <CheckboxList 
                             options={cuisines} 
                             selected={data.cuisines}
@@ -83,7 +83,7 @@ export default function EventForm(props) {
                 <div>
                     <InputLabel htmlFor="diets" value="Diets" />
 
-                    <div className='grid grid-cols-4 gap-2 mt-2'>
+                    <div className='grid grid-cols-2 md:grid-cols-4 gap-2 mt-2'>
                         <CheckboxList
                             options={diets}
                             selected={data.diets}
