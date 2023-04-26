@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Classes\AI\OpenAi\OpenAi;
+use App\Service\EventService;
 
 class GenerateDishes extends Controller
 {
@@ -20,15 +21,13 @@ class GenerateDishes extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        return (new EventService)->createEvent($request);
+    }
+
     public function generate(Request $request)
     {
-        $event = Event::create([
-            'user_id' => Auth::id(),
-            'type' => $request->type,
-            'occasion' => $request->occasion,
-            'cuisines' => $request->cuisines,
-            'diets' => $request->diets,
-        ]);
-
+        $this->store($request);
     }
 }

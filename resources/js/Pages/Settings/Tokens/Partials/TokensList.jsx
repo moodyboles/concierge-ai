@@ -70,24 +70,26 @@ export default function TokensList({ tokens, newToken, className = '' }) {
 
     const renderTokens = () => {
         return (
-            <Table 
-                className="rounded-lg overflow-hidden"
-                heads={['Name', 'Key', 'Created', 'Last Used', '']}
-                rows={tokens.map((token) => {
-                    const tokenText = newToken && newToken.id === token.id
-                        ? <span className='select-all dark:bg-gray-900 rounded-lg p-3 px-5 border-blue-300 border-2'>{newToken.token}</span>
-                        : token.token_hint;
-                    return [
-                        token.name,
-                        tokenText,
-                        moment(token.created_at).format('D MMMM YYYY'),
-                        token.last_used_at 
-                            ? moment(token.last_used_at).format('D MMMM YYYY')
-                            : 'Never used',
-                        renderDeleteBtn(token)
-                    ]
-                })}
-            />
+            <div className="w-100 overflow-x-auto">
+                <Table 
+                    className="rounded-lg overflow-hidden"
+                    heads={['Name', 'Key', 'Created', 'Last Used', '']}
+                    rows={tokens.map((token) => {
+                        const tokenText = newToken && newToken.id === token.id
+                            ? <span className='select-all dark:bg-gray-900 rounded-lg p-3 px-5 border-blue-300 border-2'>{newToken.token}</span>
+                            : token.token_hint;
+                        return [
+                            token.name,
+                            tokenText,
+                            moment(token.created_at).format('D MMMM YYYY'),
+                            token.last_used_at 
+                                ? moment(token.last_used_at).format('D MMMM YYYY')
+                                : 'Never used',
+                            renderDeleteBtn(token)
+                        ]
+                    })}
+                />
+            </div>
         )
     };
 
