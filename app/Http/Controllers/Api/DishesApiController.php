@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Classes\AI\OpenAi\Chat;
-use App\Classes\AI\Prompts\EventPrompts;
 use App\Models\Event;
 use App\Http\Controllers\Controller;
 use App\Service\EventService;
@@ -11,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use App\Service\GenerateService;
 
 class DishesApiController extends Controller
 {
@@ -46,22 +45,8 @@ class DishesApiController extends Controller
 
         if (!$event) return $this->unauthorized();
 
-        return $this->generateDishesFromEvent($event);
-    }
-
-    public function generateDishesFromEvent(Event $event) 
-    {
-        // return $event;
-
-        $eventPrompt = new EventPrompts($event);
-        // return [$eventPrompt->getMessages()];
-        
-        $chat = new Chat();
-        $response = $chat->chat($eventPrompt->getMessages());
-
-        Log::debug([$event->id, $response]);
-
-        return [$response];
+        $generateService = new GenerateService($event);
+        return $generateService->generateDishesFromEvent();
     }
 
     public function unauthorized() 
