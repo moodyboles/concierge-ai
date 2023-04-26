@@ -16,4 +16,15 @@ class OpenAi
         $this->model = $model;
     }
 
+    function formatResponse($response) 
+    {
+        $content = $response['choices'][0]['message']['content'];
+        
+        // remove text before json
+        $content = strstr($content, '{');
+        
+        // format json
+        return json_decode($content, true);
+    }
+
 }

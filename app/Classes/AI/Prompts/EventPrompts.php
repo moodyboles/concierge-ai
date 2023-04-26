@@ -21,6 +21,7 @@ class EventPrompts extends Prompts
         $messages = [
             $chat->createMessage('system', $this->prompt('indentifier')),
             $chat->createMessage('user', $this->prompt('event')),
+            // $chat->createMessage('assistant', $this->prompt('yhangry')),
             $chat->createMessage('system', $this->prompt('generate')),
             $chat->createMessage('system', $this->prompt('format')),
         ];
@@ -47,6 +48,24 @@ class EventPrompts extends Prompts
         if ($this->event->diets) {
             $prompt .= 'Diets: ' . formatValue($this->event->diets) . '\n';
         }
+
+        return $prompt;
+    }
+
+    public function getYhangryPrompt() 
+    {
+        $prompt = '';
+
+        $prompt .= 'Based on the information the user provided, here are some dishes other users have found suitable for similar events:\n';
+
+        $prompt .= '
+        Hi charlie, as discussed please find the vegan afro carribean menu
+        - Starter : Jerk mushrooms tacos, avocado texture and pomegranate.
+         - Main : carribean style roasted celeriac steak sides:jollof rice - coconut calaloo 
+        - Dessert : Rum cake & ackee ice cream - sorrel coulis. The dessert is vegan.';
+        // $prompt .= 'Vegan Stuffed Portobello Mushrooms\n';
+        // $prompt .= 'Vegan Lasagna\n';
+        // $prompt .= 'Falafel\n';
 
         return $prompt;
     }

@@ -35,6 +35,7 @@ class EventsController extends Controller
                 'token' => function ($query) {
                     $query->select('id', 'name');
                 },
+                'menus'
             ])
             ->firstOrFail();
         
