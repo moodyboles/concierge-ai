@@ -11,6 +11,8 @@ export default function MenuSummary(props) {
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Menu #{index}</h2>
             </header>
 
+            <h2 className="font-medium text-gray-800 dark:text-gray-300">{menu.response}</h2>
+
             {_.map(courses, (dishes, course) => {
                 return (
                     <>

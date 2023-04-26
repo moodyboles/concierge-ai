@@ -27,6 +27,12 @@ export default function Authenticated({ user, header, children, className = '' }
                                 <NavLink href={route('generate.view')} active={route().current('generate.view')}>
                                     Generate Dishes
                                 </NavLink>
+                                <NavLink href={route('events.index')} active={route().current('events.index')}>
+                                    My Events
+                                </NavLink>
+                                <NavLink href={route('tokens.index')} active={route().current('tokens.index')}>
+                                    API Keys
+                                </NavLink>
                             </div>
                         </div>
 
@@ -59,6 +65,7 @@ export default function Authenticated({ user, header, children, className = '' }
 
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                                        <Dropdown.Link href={route('events.index')}>My Events</Dropdown.Link>
                                         <Dropdown.Link href={route('tokens.index')}>API Keys</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
@@ -112,6 +119,7 @@ export default function Authenticated({ user, header, children, className = '' }
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('events.index')}>My Events</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('tokens.index')}>API Keys</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out

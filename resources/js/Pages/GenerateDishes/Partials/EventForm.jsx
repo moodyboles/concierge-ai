@@ -3,6 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import CheckboxList from '@/Components/CheckboxList';
 import SelectBox from '@/Components/SelectBox';
+import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import _ from 'lodash';
@@ -22,6 +23,18 @@ export default function EventForm(props) {
 
         patch(route('generate.dishes'));
     };
+
+    const renderLoading = () => {
+        return (
+            <div className="flex flex-col items-center justify-center mt-5">
+                <ApplicationLogo className="animate-bounce block w-20 fill-current text-gray-800 dark:text-gray-200" />
+                <strong className='text-lg text-gray-900 dark:text-gray-100 mt-3'>Thinking...</strong>
+                <p className='font-medium text-gray-700 dark:text-gray-400 mt-3'>Please wait, do not refresh the page</p>
+            </div>
+        )
+    }
+
+    if (processing) return renderLoading();
 
     return (
         <section className={className}>
