@@ -35,6 +35,12 @@ class GenerateDishes extends Controller
 
     public function generate(Request $request)
     {
+        $request->validate([
+            'type' => 'required',
+            'occasion' => 'required',
+            'cuisines' => 'required',
+        ]);
+
         $event = $this->store($request);
         $menu = $this->generateMenu($event);
         return redirect()->route('events.show', ['event' => $event->id]);

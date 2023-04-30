@@ -3,6 +3,7 @@ namespace App\Classes\AI\Prompts;
 
 use Illuminate\Support\Facades\Log;
 use App\Classes\AI\OpenAi\Chat;
+use App\Classes\AI\Assistant\Yhangry;
 
 class EventPrompts extends Prompts
 {
@@ -21,7 +22,7 @@ class EventPrompts extends Prompts
         $messages = [
             $chat->createMessage('system', $this->prompt('indentifier')),
             $chat->createMessage('user', $this->prompt('event')),
-            // $chat->createMessage('assistant', $this->prompt('yhangry')),
+            $chat->createMessage('assistant', $this->prompt('assistant')),
             $chat->createMessage('system', $this->prompt('generate')),
             $chat->createMessage('system', $this->prompt('format')),
         ];
@@ -52,20 +53,23 @@ class EventPrompts extends Prompts
         return $prompt;
     }
 
-    public function getYhangryPrompt() 
+    public function getAssistantPrompt() 
     {
-        $prompt = '';
+        $yhangry = new Yhangry([
+            'type' => $this->event->type,
+            'diets' => $this->event->diets,
+        ]);
 
-        $prompt .= 'Based on the information the user provided, here are some dishes other users have found suitable for similar events:\n';
+        $menus = $yhangry->getSimilarMenus();
 
-        $prompt .= '
-        Hi charlie, as discussed please find the vegan afro carribean menu
-        - Starter : Jerk mushrooms tacos, avocado texture and pomegranate.
-         - Main : carribean style roasted celeriac steak sides:jollof rice - coconut calaloo 
-        - Dessert : Rum cake & ackee ice cream - sorrel coulis. The dessert is vegan.';
-        // $prompt .= 'Vegan Stuffed Portobello Mushrooms\n';
-        // $prompt .= 'Vegan Lasagna\n';
-        // $prompt .= 'Falafel\n';
+        if (!$menus) return;
+
+        $prompt = 'Based on the information the user provided, here are some dishes other users have found suitable for similar events:\n';
+
+        foreach ($menus as $menu) {
+            $prompt .= '\n------------------------\n';
+            $prompt .= $menu;
+        }
 
         return $prompt;
     }

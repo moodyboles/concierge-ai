@@ -3,8 +3,6 @@ namespace App\Service;
 
 use App\Models\Event;
 use App\Models\Menu;
-// use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 use App\Classes\AI\OpenAi\Chat;
