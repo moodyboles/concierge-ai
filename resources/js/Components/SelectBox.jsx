@@ -21,6 +21,7 @@ export default forwardRef(function SelectBox({ className = '', isFocused = false
             onChange={(e) => select(e.target.value)}
             defaultValue={selected}
         >
+            <option value=''>Select...</option>
             {_.map(props.options, (name, value) => {
                 return (
                     <option 
