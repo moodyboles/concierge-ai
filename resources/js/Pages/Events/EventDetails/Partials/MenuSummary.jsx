@@ -15,17 +15,17 @@ export default function MenuSummary(props) {
 
             {_.map(courses, (dishes, course) => {
                 return (
-                    <>
-                    <p className="text-lg font-medium text-gray-900 dark:text-gray-100 capitalize">{course}</p>
-                    {dishes.map((dish) => (
-                        <div className="flex items-center justify-between p-4 bg-white dark:bg-slate-700 sm:rounded-lg" key={course}>
-                            <div className="flex flex-col space-y-2">
-                                <p className="text-gray-200 dark:text-gray-200"><strong>{dish.dishName}</strong></p>
-                                <p className="text-sm text-gray-200 dark:text-gray-200 ml-0">{dish.description}</p>
+                    <div className="space-y-6" key={course}>
+                        <p className="text-lg font-medium text-gray-900 dark:text-gray-100 capitalize">{course}</p>
+                        {dishes.map((dish) => (
+                            <div className="flex items-center justify-between p-4 bg-gray-200 dark:bg-slate-700 sm:rounded-lg" key={dish}>
+                                <div className="flex flex-col space-y-2">
+                                    <p className="text-gray-900 dark:text-gray-200"><strong>{dish.dishName}</strong></p>
+                                    <p className="text-sm text-gray-900 dark:text-gray-200 ml-0">{dish.description}</p>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                    </>
+                        ))}
+                    </div>
                 )
             })}
             

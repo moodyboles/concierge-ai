@@ -18,7 +18,7 @@ export default function Table({ heads, rows, className = '' }) {
             </thead>
             <tbody>
                 {rows.map((row, idx) => (
-                    <tr key={idx} className='bg-white dark:bg-slate-800 hover:bg-slate-900'>
+                    <tr key={idx} className='bg-white dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-900'>
                         {row.map((cell, idx) => (
                             <td 
                                 key={idx}
